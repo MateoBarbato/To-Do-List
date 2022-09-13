@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TextInput, Button, FlatList, TouchableOpacity} from 'react-native';
-import { CustomModal, AddTask } from './components/index';
-// import {stylesTask} from './components/addtask/styles'
+import { CustomModal, AddTask , CustomFlatList } from './components/index';
+
 
 export default function App() {
 
@@ -52,7 +52,7 @@ export default function App() {
       placeholder='New Task'
       addItem={addItem}
       />
-      <FlatList
+      <CustomFlatList
         style={styles.containerToDo}
         data={lista}
         renderItem={renderList}
@@ -94,13 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(107, 191, 255, 0.29)',
   },
-  containerToDo:{
-    flex:1,
-    borderWidth:1,
-    borderColor:'#192A51',
-    marginHorizontal:15,
-    marginBottom:20
-  },
+ 
   alignJusti:{
     justifyContent:'center',
     alignItems:'center'
@@ -165,12 +159,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#ffffff',
-  },
-  input: {
-    width:'75%',
-    borderBottomColor:'#192A51',
-    borderBottomWidth:1,
-    height:40,
-    color:'black',
   }
 });

@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TextInput, Button, FlatList, TouchableOpacity} from 'react-native';
-import { Modal } from 'react-native-web';
-
+import { CustomModal, AddTask } from './components/index';
+// import {stylesTask} from './components/addtask/styles'
 
 export default function App() {
 
@@ -16,42 +16,42 @@ export default function App() {
   }
 
   const addItem = () => {
-    setLista((prevLista)=>[...prevLista,
+    setLista((prevLista)=> [...prevLista,
     {id:Date.now(),data:task}
     ]);
   }
 
   const onHandleModal = (id) =>{
-    setModalVisible(true)
+    setModalVisible(!modalVisible)
     setSelectedTask(lista.find((item) => item.id === id))
-    console.warn(id)
   }
 
   const renderList = ({item})=> (
-      <View key ={item.id}>
+      <View key={item.id} style={styles.containerItem}>
       <Text style={styles.toDoText}>{item.data}</Text>
       <TouchableOpacity style={styles.button} onPress={ () => onHandleModal(item.id)}>
         <Text style={styles.delete}>X</Text>
       </TouchableOpacity>
       </View>
+      
   )
 
   const onHandleDeleteItem = (id) => { 
-    setLista(task.filter((item) => item.id===id));
+    setLista(lista.filter((item) => item.id!==id));
     setSelectedTask(null);
     setModalVisible(!modalVisible)
   }
 
   return (
+    
+    
     <View style={styles.container}>
-      <View style={styles.textInputContainer}>
-        <TextInput 
-          placeholder='New Task' 
-          style={styles.input}
-          onChangeText = {(value)=> onHandleChangeText(value)}
-        />
-        <Button title='Add' color={'#192A51'} onPress={addItem}></Button>
-      </View>
+      <AddTask
+      task={task}
+      onChangeText={onHandleChangeText}
+      placeholder='New Task'
+      addItem={addItem}
+      />
       <FlatList
         style={styles.containerToDo}
         data={lista}
@@ -60,9 +60,9 @@ export default function App() {
         // contentContainerStyle={styles.alignJusti}
         showsVerticalScrollIndicator={false}
       />
-      <Modal animationType="slide" visible={modalVisible}> 
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Detalle de la lista</Text>
+      <CustomModal visible={modalVisible} animationType ={'slice'}>
+      <View style={styles.modalContainer}>
+       <Text style={styles.modalTitle}>Detalle de la lista</Text>
         </View>
         <View style={styles.modalMessageContainer}> 
           <Text style={styles.modalMessage}>¿Estas seguro de que quieres eliminar?</Text>
@@ -82,16 +82,46 @@ export default function App() {
             color='#cccccc'
           />
         </View>
-      </Modal>
+      </CustomModal>
       <StatusBar style="auto" />
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgba(107, 191, 255, 0.29)',
+  },
+  containerToDo:{
+    flex:1,
+    borderWidth:1,
+    borderColor:'#192A51',
+    marginHorizontal:15,
+    marginBottom:20
+  },
+  alignJusti:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerItem:{
+    flex:1,
+    justifyContent:'space-evenly',
+    flexDirection:'row'
+  },
+  toDoText:{
+    borderWidth:1,
+    borderColor:'#192A51',
+    width:280,
+    borderRadius:5,
+    paddingHorizontal:10,
+    height:30,
+    marginVertical:10,
+    marginHorizontal:4,
+    lineHeight:30,
+    backgroundColor:'white'
+
   },
   modalContainer: {
     justifyContent: 'center',
@@ -120,6 +150,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#4A306D',
     padding: 10,
     borderRadius: 10,
+    width:'10%',
+    height:'80%',
+    marginTop:5,
+    alignItems:'center',
+    justifyContent:'center'
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -129,37 +164,7 @@ const styles = StyleSheet.create({
   delete: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#ffffff'
-  },
-  textInputContainer: {
-    marginHorizontal:20,
-    marginTop:50,
-    marginBottom:20,
-    backgroundColor:'#DEE2FF',
-    padding:5,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  containerToDo:{
-    flex:1,
-    borderWidth:1,
-    borderColor:'#192A51',
-    marginHorizontal:15,
-    marginBottom:20
-  },
-  alignJusti:{
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  toDoText:{
-    borderWidth:1,
-    borderColor:'#192A51',
-    width:320,
-    paddingHorizontal:10,
-    height:30,
-    marginVertical:10,
-    lineHeight:30
-
+    color: '#ffffff',
   },
   input: {
     width:'75%',

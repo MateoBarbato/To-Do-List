@@ -13,7 +13,7 @@ const AddTask = ({task, onChangeText, addItem ,placeholder}) => {
           onChangeText = {onChangeText}
           value={task}
         />
-        <Button title='Add' color={'#192A51'} onPress={addItem}></Button>
+        <Button title='Add' color={'rgb(54, 84, 134)'} onPress={addItem}></Button>
       </View>
     )
 

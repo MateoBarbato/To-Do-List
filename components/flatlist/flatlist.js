@@ -9,7 +9,6 @@ const CustomFlatList = ( {data,renderItem,showsVerticalScrollIndicator} ) => {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item)=> item.id.toString()}
-        // contentContainerStyle={styles.alignJusti}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />    
     )

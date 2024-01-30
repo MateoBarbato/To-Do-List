@@ -74,7 +74,7 @@ export default function App() {
           <Button 
             title='Eliminar'
             onPress={() => onHandleDeleteItem(selectedTask?.id)}
-            color='#4A306D'
+            color='rgb(54, 84, 134)'
           />
           <Button 
             title='Cancelar'
@@ -92,7 +92,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(107, 191, 255, 0.29)',
+    backgroundColor: 'rgba(15, 16, 53,0.23)',
   },
  
   alignJusti:{
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
     flexDirection:'row'
   },
   toDoText:{
-    borderWidth:1,
-    borderColor:'#192A51',
+    borderWidth:2,
+    borderColor:'rgb(127, 199, 217)',
     width:280,
     borderRadius:5,
     paddingHorizontal:10,
@@ -141,8 +141,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
-    backgroundColor: '#4A306D',
-    padding: 10,
+    backgroundColor: 'rgb(54, 84, 134)',
     borderRadius: 10,
     width:'10%',
     height:'80%',
@@ -153,11 +152,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginHorizontal: 20,
   },
   delete: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#fff',
   }
 });
